@@ -1,66 +1,176 @@
-[gd_scene load_steps=8 format=3 uid="uid://48q3kw6y3kok"]
+[gd_scene load_steps=16 format=3 uid="uid://48q3kw6y3kok"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_xwgro"]
+[ext_resource type="Script" uid="uid://bfek87omkkdan" path="res://scripts/main.gd" id="1_xwgro"]
 [ext_resource type="PackedScene" uid="uid://bdligwwk3qpvr" path="res://scenes/circle.tscn" id="2_deply"]
 [ext_resource type="PackedScene" uid="uid://corefj36ohbc4" path="res://scenes/cross.tscn" id="3_dp6dw"]
 [ext_resource type="PackedScene" uid="uid://3a5blep4fvdi" path="res://scenes/board.tscn" id="4_clex0"]
-[ext_resource type="PackedScene" uid="uid://bx4vp86v67fs1" path="res://scenes/game_over_menu.tscn" id="5_v40pf"]
+[ext_resource type="FontFile" uid="uid://fd7w7gjauxch" path="res://world/PixelRPG.ttf" id="5_tefeu"]
+[ext_resource type="AudioStream" uid="uid://cx34ol20pox0v" path="res://assets/316899__jaz_the_man_2__do-stretched.wav" id="6_trceg"]
+[ext_resource type="AudioStream" uid="uid://blxop2xb2ngfy" path="res://assets/316909__jaz_the_man_2__re-stretched.wav" id="7_a8y0u"]
+[ext_resource type="AudioStream" uid="uid://cgwd42flcu3sm" path="res://assets/316907__jaz_the_man_2__mi-stretched.wav" id="8_jkv2x"]
+[ext_resource type="AudioStream" uid="uid://dqnn3u374bh52" path="res://assets/316905__jaz_the_man_2__fa-stretched.wav" id="9_jbj1t"]
+[ext_resource type="AudioStream" uid="uid://ckvl1i3k5ujoh" path="res://assets/316911__jaz_the_man_2__sol-stretched.wav" id="10_muem4"]
+[ext_resource type="AudioStream" uid="uid://swqt2yxellmn" path="res://assets/316903__jaz_the_man_2__la-stretched.wav" id="11_dp3eg"]
+[ext_resource type="AudioStream" uid="uid://nu3w3aspith5" path="res://assets/316910__jaz_the_man_2__si-stretched.wav" id="12_0ld40"]
+[ext_resource type="AudioStream" uid="uid://co2pfuqeo72fm" path="res://assets/316900__jaz_the_man_2__do-stretched-octave.wav" id="13_gqmmt"]
+[ext_resource type="AudioStream" uid="uid://ch8v710wl7dec" path="res://assets/error-126627.mp3" id="14_a8y0u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_772xk"]
-bg_color = Color(0, 0.666667, 0.803922, 1)
+bg_color = Color(0, 0, 0, 1)
 border_width_left = 5
 border_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5pglo"]
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-shadow_size = 5
-shadow_offset = Vector2(5, 5)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_xwgro")
 circle_scene = ExtResource("2_deply")
 cross_scene = ExtResource("3_dp6dw")
 
-[node name="Board" parent="." instance=ExtResource("4_clex0")]
-position = Vector2(300, 300)
-
-[node name="SidePanel" type="Panel" parent="."]
+[node name="Background" type="Panel" parent="."]
 custom_minimum_size = Vector2(300, 600)
-anchors_preset = 11
-anchor_left = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 0
+grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_772xk")
 
-[node name="PlayerLabel" type="Label" parent="."]
+[node name="Board" parent="." instance=ExtResource("4_clex0")]
+position = Vector2(249, 284.5)
+scale = Vector2(0.6383333, 0.63166666)
+
+[node name="WinLines" type="Node2D" parent="."]
+
+[node name="LineDiagonal1" type="Line2D" parent="WinLines"]
+visible = false
+z_index = 1
+position = Vector2(-231, 21)
+points = PackedVector2Array(323, 119, 628, 420)
+
+[node name="LineDiagonal2" type="Line2D" parent="WinLines"]
+visible = false
+z_index = 1
+position = Vector2(-235, -42)
+points = PackedVector2Array(329, 498, 501.2671, 311.88492, 640, 162)
+
+[node name="LineRow1" type="Line2D" parent="WinLines"]
+visible = false
+z_index = 1
+position = Vector2(-288, 36)
+points = PackedVector2Array(348, 130, 723, 128)
+
+[node name="LineRow2" type="Line2D" parent="WinLines"]
+visible = false
+z_index = 1
+position = Vector2(-270, 161)
+points = PackedVector2Array(314, 131, 723, 128)
+
+[node name="LineRow3" type="Line2D" parent="WinLines"]
+visible = false
+z_index = 1
+position = Vector2(-257, 275)
+points = PackedVector2Array(314, 131, 687, 136)
+
+[node name="LineCol1" type="Line2D" parent="WinLines"]
+visible = false
+z_index = 1
+position = Vector2(-176, -30)
+points = PackedVector2Array(319, 139, 316, 487)
+
+[node name="LineCol2" type="Line2D" parent="WinLines"]
+visible = false
+z_index = 1
+position = Vector2(-69, -26)
+points = PackedVector2Array(317, 125, 316, 487)
+
+[node name="LineCol3" type="Line2D" parent="WinLines"]
+visible = false
+z_index = 1
+position = Vector2(72, -22)
+points = PackedVector2Array(318, 126, 317.41333, 298.08115, 316, 487)
+
+[node name="StartMessage" type="Label" parent="."]
 custom_minimum_size = Vector2(300, 64)
-offset_left = 600.0
-offset_top = 150.0
-offset_right = 900.0
-offset_bottom = 214.0
-theme_override_font_sizes/font_size = 36
-text = "Next Player:"
+offset_left = 60.0
+offset_top = 544.0
+offset_right = 434.0
+offset_bottom = 629.0
+theme_override_colors/font_color = Color(6.3532593e-06, 0.6624216, 0.8324296, 1)
+theme_override_fonts/font = ExtResource("5_tefeu")
+theme_override_font_sizes/font_size = 40
+text = "The Unbeatable
+ Tic Tac Toe"
+horizontal_alignment = 3
+vertical_alignment = 1
+
+[node name="StartInstruction" type="Label" parent="."]
+custom_minimum_size = Vector2(300, 64)
+offset_left = 87.0
+offset_top = 667.0
+offset_right = 423.0
+offset_bottom = 731.0
+theme_override_fonts/font = ExtResource("5_tefeu")
+theme_override_font_sizes/font_size = 27
+text = "Click on a grid 
+to play"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NextPlayerPanel" type="Panel" parent="."]
-offset_left = 650.0
-offset_top = 210.0
-offset_right = 850.0
-offset_bottom = 410.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_5pglo")
+[node name="GameOver" type="Label" parent="."]
+visible = false
+custom_minimum_size = Vector2(300, 64)
+offset_left = 71.0
+offset_top = 544.0
+offset_right = 407.0
+offset_bottom = 608.0
+theme_override_fonts/font = ExtResource("5_tefeu")
+theme_override_font_sizes/font_size = 48
+text = "Game Over!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="GameOverMenu" parent="." instance=ExtResource("5_v40pf")]
-process_mode = 2
+[node name="Instruction" type="Label" parent="."]
+visible = false
+custom_minimum_size = Vector2(300, 64)
+offset_left = 18.0
+offset_top = 607.0
+offset_right = 479.0
+offset_bottom = 671.0
+theme_override_fonts/font = ExtResource("5_tefeu")
+theme_override_font_sizes/font_size = 28
+text = "Press Any Key"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[connection signal="restart" from="GameOverMenu" to="." method="_on_game_over_menu_restart"]
+[node name="ReplayDelay" type="Timer" parent="."]
+one_shot = true
+
+[node name="GridNotes" type="Node" parent="."]
+
+[node name="do" type="AudioStreamPlayer" parent="GridNotes"]
+stream = ExtResource("6_trceg")
+
+[node name="re" type="AudioStreamPlayer" parent="GridNotes"]
+stream = ExtResource("7_a8y0u")
+
+[node name="mi" type="AudioStreamPlayer" parent="GridNotes"]
+stream = ExtResource("8_jkv2x")
+
+[node name="fa" type="AudioStreamPlayer" parent="GridNotes"]
+stream = ExtResource("9_jbj1t")
+
+[node name="so" type="AudioStreamPlayer" parent="GridNotes"]
+stream = ExtResource("10_muem4")
+
+[node name="la" type="AudioStreamPlayer" parent="GridNotes"]
+stream = ExtResource("11_dp3eg")
+
+[node name="ti" type="AudioStreamPlayer" parent="GridNotes"]
+stream = ExtResource("12_0ld40")
+
+[node name="do-octave" type="AudioStreamPlayer" parent="GridNotes"]
+stream = ExtResource("13_gqmmt")
+
+[node name="FailSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_a8y0u")
+
+[connection signal="timeout" from="ReplayDelay" to="." method="_on_replay_delay_timeout"]

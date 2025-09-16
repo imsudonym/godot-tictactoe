@@ -3,4 +3,5 @@
 [ext_resource type="Texture2D" uid="uid://rftf5cpvdvnj" path="res://assets/grid.png" id="1_virdp"]
 
 [node name="Board" type="Sprite2D"]
+position = Vector2(300, 300)
 texture = ExtResource("1_virdp")
